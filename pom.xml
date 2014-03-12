@@ -4,7 +4,7 @@
     <artifactId>mariadb-java-client</artifactId>
     <packaging>jar</packaging>
     <name>mariadb-java-client</name>
-    <version>1.1.6</version>
+    <version>1.1.6.1-SNAPSHOT</version>
     <description>JDBC driver for MariaDB and MySQL</description>
     <url>https://kb.askmonty.org/en/about-the-mariadb-java-client/</url>
     <properties>
@@ -17,9 +17,9 @@
         </license>
     </licenses>
    <scm>
-       <connection>scm:bazaar:http://bazaar.launchpad.net/+branch/mariadb-java-client</connection>
-       <url>http://bazaar.launchpad.net/+branch/mariadb-java-client</url>
-       <developerConnection>scm:bazaar:sftp://bazaar.launchpad.net/+branch/mariadb-java-client</developerConnection>
+       <connection>scm:git:git@github.com:ScholasticInc/mariadb-java-client.git</connection>
+       <url>https://github.com/ScholasticInc/mariadb-jdbc-client</url>
+       <developerConnection>scm:git:git@github.com:ScholasticInc/mariadb-java-client.git</developerConnection>
    </scm>
     <issueManagement>
       <system>Launchpad</system>
@@ -199,4 +199,16 @@
       <artifactId>oss-parent</artifactId>
       <version>6</version>
     </parent>
+    <distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>maven.education.scholastic.com-releases</name>
+			<url>https://maven.education.scholastic.com/artifactory/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>maven.education.scholastic.com-snapshots</name>
+			<url>https://maven.education.scholastic.com/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
