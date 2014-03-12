@@ -6,6 +6,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * @author krisiyer - patched column index per jdbc 4.1 - 15.2.3 Retrieving Values (CONJ-84) 
+ * @see  http://download.oracle.com/otn-pub/jcp/jdbc-4_1-mrel-spec/jdbc4.1-fr-spec.pdf
+ *
+ */
 
 public class ColumnNameMap {
     Map<String, Integer> map;
@@ -60,11 +66,24 @@ public class ColumnNameMap {
             int i=0;
             for(MySQLColumnInformation ci : columnInfo) {
                 String columnAlias = ci.getName().toLowerCase();
-                labelMap.put(columnAlias, i);
+                
+                // jdbc 4.1 - 15.2.3 Retrieving Values 
+                // The columns are numbered from left to right,
+                // as they appear in the select list of the query, starting at 1.
+                // Column labels supplied to getter methods are case insensitive. 
+                // If a select list contains the same column more than once, 
+                // the first instance of the column will be returned.
+                
+                // preserve the earliest column/alias index.
+                if(!labelMap.containsKey(columnAlias))
+                	labelMap.put(columnAlias, i);
+                
                 if (ci.getTable() != null) {
                     String tableName = ci.getTable().toLowerCase();
                     if (!tableName.equals("")) {
-                        labelMap.put(tableName + "." + columnAlias, i);
+                    	// preserve the earliest column/alias index.
+                    	if(!labelMap.containsKey(tableName + "." + columnAlias))
+                    		labelMap.put(tableName + "." + columnAlias, i);
                     }
                 }
                 i++;
